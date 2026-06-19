@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "exportedAt": "2026-06-19T21:21:59.570Z",
+  "exportedAt": "2026-06-19T21:22:39.951Z",
   "progress": {
     "frames:/Lotus/Powersuits/Ninja/Ninja": {
-      "state": "none",
+      "state": "mastered",
       "owned": false,
       "favorite": false,
       "rank": "",
@@ -121,7 +121,7 @@
           "notes": ""
         }
       ],
-      "updatedAt": null
+      "updatedAt": "2026-06-19T21:22:34.931Z"
     },
     "frames:/Lotus/Powersuits/Ninja/AshPrime": {
       "state": "none",
