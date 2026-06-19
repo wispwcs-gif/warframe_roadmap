@@ -230,6 +230,33 @@
     body[data-theme="dark"] .githubHint p,
     body[data-theme="dark"] .githubHint ol{color:#9ab2c1}
     body[data-theme="dark"] .githubHint code{background:rgba(4,13,22,.72); border-color:rgba(116,228,255,.22); color:#eaf7ff}
+
+    .syncPanel{margin-bottom:18px; padding:18px; position:relative; overflow:hidden}
+    .syncPanel:before{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 92% 8%, rgba(57,199,223,.22), transparent 32%), radial-gradient(circle at 8% 92%, rgba(197,157,75,.18), transparent 28%)}
+    .syncPanel>*{position:relative}
+    .syncHead{display:flex; justify-content:space-between; gap:14px; align-items:flex-start; margin-bottom:12px}
+    .syncHead h3{margin:0; font-size:20px; letter-spacing:.08em; text-transform:uppercase; color:#8a6a22; text-shadow:0 1px 0 rgba(255,255,255,.62)}
+    .syncHead p{margin:5px 0 0; color:#617886; line-height:1.5; font-size:14px; max-width:780px}
+    .syncBadge{white-space:nowrap; font-size:12px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; border:1px solid rgba(57,199,223,.28); background:rgba(255,255,255,.46); color:#1d6b7c; padding:8px 10px; clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+    .syncForm{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; align-items:end}
+    .syncForm label{display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:#5a7180}
+    .syncForm input{width:100%}
+    .syncToken{grid-column:span 2}
+    .syncActions{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; align-items:center}
+    .syncActions button{min-height:40px}
+    .syncStatus{font-size:13px; color:#617886; line-height:1.45; padding:10px 12px; margin-top:12px; border:1px solid rgba(65,105,126,.12); background:rgba(255,255,255,.40); clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+    .syncStatus.ok{color:#246f50; border-color:rgba(62,191,124,.28); background:rgba(62,191,124,.10)}
+    .syncStatus.warn{color:#826124; border-color:rgba(210,154,51,.30); background:rgba(210,154,51,.10)}
+    .syncStatus.bad{color:#8b3333; border-color:rgba(217,94,94,.34); background:rgba(217,94,94,.10)}
+    .syncNote{font-size:12px; color:#708391; line-height:1.45; margin-top:8px}
+    body[data-theme="dark"] .syncHead h3{color:#e5c67e; text-shadow:none}
+    body[data-theme="dark"] .syncHead p,
+    body[data-theme="dark"] .syncForm label,
+    body[data-theme="dark"] .syncNote{color:#9ab2c1}
+    body[data-theme="dark"] .syncBadge{background:rgba(4,13,22,.72); border-color:rgba(116,228,255,.22); color:#9af5ff}
+    body[data-theme="dark"] .syncStatus{background:rgba(4,13,22,.52); border-color:rgba(116,228,255,.18); color:#9ab2c1}
+    @media(max-width:1100px){.syncForm{grid-template-columns:repeat(2,minmax(0,1fr))}.syncToken{grid-column:span 2}}
+    @media(max-width:620px){.syncHead{display:block}.syncBadge{display:inline-block; margin-top:10px}.syncForm{grid-template-columns:1fr}.syncToken{grid-column:span 1}}
     @media(max-width:1000px){.githubHintGrid{grid-template-columns:1fr}}
     .hidden{display:none!important}
     .modline{display:grid; grid-template-columns:1.1fr 1.35fr 150px minmax(230px,1fr); gap:10px; align-items:start; padding:10px 0; border-top:1px solid rgba(65,105,126,.14)}
@@ -423,16 +450,41 @@
       <div class="githubHintGrid">
         <div>
           <p>Этот файл уже подготовлен как <b>index.html</b>. Его можно загрузить в репозиторий GitHub и включить GitHub Pages. Сама программа будет открываться с любого компьютера.</p>
-          <p><b>Важно:</b> прогресс хранится в браузере. Чтобы перенести его на другой ПК, нажми <b>«Скачать бэкап»</b>, а на другом устройстве — <b>«Загрузить бэкап»</b>.</p>
+          <p><b>Бэкап оставлен как страховка</b>, но теперь можно включить синхронизацию: прогресс будет подтягиваться из файла в репозитории и автоматически записываться обратно через GitHub API.</p>
         </div>
         <ol>
-          <li>Создай репозиторий, например <code>warframe-tracker</code>.</li>
-          <li>Загрузи туда файл <code>index.html</code>.</li>
-          <li>Открой <b>Settings → Pages</b>.</li>
-          <li>Выбери <b>Deploy from a branch</b>, ветку <b>main</b>, папку <b>/root</b>.</li>
-          <li>Открой ссылку вида <code>https://логин.github.io/warframe-tracker/</code>.</li>
+          <li>Создай fine-grained token только для этого репозитория.</li>
+          <li>Разрешение: <b>Repository permissions → Contents → Read and write</b>.</li>
+          <li>Вставь owner/repo/branch/path/token ниже и нажми <b>Сохранить настройки</b>.</li>
+          <li>После первого импорта бэкапа нажми <b>Сохранить сейчас</b>.</li>
+          <li>Дальше изменения будут уходить в GitHub автоматически.</li>
         </ol>
       </div>
+    </section>
+
+    <section class="syncPanel glass">
+      <div class="syncHead">
+        <div>
+          <h3>Автосохранение в GitHub</h3>
+          <p>Локальное сохранение работает мгновенно, а GitHub-синхронизация отправляет изменения с небольшой паузой, чтобы не плодить коммит на каждый клик.</p>
+        </div>
+        <div id="syncBadge" class="syncBadge">Sync off</div>
+      </div>
+      <div class="syncForm">
+        <label><span>Owner</span><input id="syncOwner" placeholder="твой логин GitHub"></label>
+        <label><span>Repo</span><input id="syncRepo" placeholder="warframe-tracker"></label>
+        <label><span>Branch</span><input id="syncBranch" placeholder="main"></label>
+        <label><span>Path</span><input id="syncPath" placeholder="warframe-progress.json"></label>
+        <label class="syncToken"><span>Token</span><input id="syncToken" type="password" autocomplete="off" placeholder="github_pat_..."></label>
+      </div>
+      <div class="syncActions">
+        <button id="syncSaveSettings">Сохранить настройки</button>
+        <button id="syncPull" class="secondary">Загрузить с GitHub</button>
+        <button id="syncPush" class="secondary">Сохранить сейчас</button>
+        <button id="syncDisable" class="danger">Отключить sync</button>
+      </div>
+      <div id="syncStatus" class="syncStatus warn">Синхронизация не настроена. Прогресс пока хранится только в этом браузере.</div>
+      <div class="syncNote">Токен не попадает в код и не коммитится — он хранится только в localStorage этого браузера. Для другого устройства токен нужно вставить один раз.</div>
     </section>
 
     <section class="favorites glass">
@@ -514,6 +566,7 @@ const defaultModSlots = ['Аура', 'Эксилус', 'Мод 1', 'Мод 2', '
 const LS_PROGRESS='wf_collection_progress_v1';
 const LS_ITEMS='wf_collection_items_cache_v2';
 const LS_THEME='wf_collection_theme_v1';
+const LS_GITHUB_SYNC='wf_collection_github_sync_v1';
 let items={frames:[], weapons:[], mods:[]};
 let progress=JSON.parse(localStorage.getItem(LS_PROGRESS)||'{}');
 let mode='frames'; let selectedKey=null;
@@ -573,7 +626,7 @@ function getP(item){
   });
   return progress[k];
 }
-function save(){localStorage.setItem(LS_PROGRESS, JSON.stringify(progress)); calcOverall(); renderFavorites(); renderList(false)}
+function save(){localStorage.setItem(LS_PROGRESS, JSON.stringify(progress)); calcOverall(); renderFavorites(); renderList(false); scheduleGithubSync();}
 async function fetchJson(url){ const r=await fetch(url, {cache:'no-store'}); if(!r.ok) throw new Error(url); return await r.json(); }
 async function loadData(force=false){
   $('dataStatus').textContent='Загружаю актуальные списки предметов и модов из WFCD/warframe-items…';
@@ -676,11 +729,183 @@ function calcOverall(){
   const done=all.filter(i=>['built','mastered','ready'].includes(getP(i).state)).length; const mastered=all.filter(i=>['mastered','ready'].includes(getP(i).state)).length; const pct=Math.round(done/all.length*100);
   $('overallBar').style.width=pct+'%'; $('overallText').textContent=`Собрано: ${done}/${all.length} (${pct}%). Прокачано/Mastered или готово: ${mastered}/${all.length}.`;
 }
+
+function readGithubSyncConfig(){
+  try{return JSON.parse(localStorage.getItem(LS_GITHUB_SYNC)||'{}')||{};}catch(e){return {};}
+}
+function writeGithubSyncConfig(cfg){localStorage.setItem(LS_GITHUB_SYNC, JSON.stringify(cfg||{}));}
+let githubSyncConfig=readGithubSyncConfig();
+let githubSyncTimer=null;
+let githubSyncDirty=false;
+let githubSyncBusy=false;
+let githubRemoteSha=null;
+
+function inferGithubPagesConfig(){
+  const cfg={owner:'', repo:'', branch:'main', path:'warframe-progress.json', token:'', enabled:false};
+  const host=location.hostname || '';
+  const parts=(location.pathname||'').split('/').filter(Boolean);
+  if(host.endsWith('.github.io')){
+    cfg.owner=host.replace('.github.io','');
+    cfg.repo=parts[0] || `${cfg.owner}.github.io`;
+  }
+  return cfg;
+}
+function mergedGithubSyncConfig(){return {...inferGithubPagesConfig(), ...githubSyncConfig};}
+function isGithubSyncReady(){
+  const c=mergedGithubSyncConfig();
+  return !!(c.enabled && c.owner && c.repo && c.branch && c.path && c.token);
+}
+function githubApiFileUrl(){
+  const c=mergedGithubSyncConfig();
+  const safePath=String(c.path||'warframe-progress.json').split('/').map(encodeURIComponent).join('/');
+  return `https://api.github.com/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/contents/${safePath}`;
+}
+function githubHeaders(){
+  const c=mergedGithubSyncConfig();
+  return {
+    'Accept':'application/vnd.github+json',
+    'Authorization':'Bearer '+c.token,
+    'X-GitHub-Api-Version':'2022-11-28'
+  };
+}
+function toBase64Unicode(str){
+  const bytes=new TextEncoder().encode(str);
+  let bin='';
+  bytes.forEach(b=>bin+=String.fromCharCode(b));
+  return btoa(bin);
+}
+function fromBase64Unicode(str){
+  const bin=atob(String(str||'').replace(/\n/g,''));
+  const bytes=Uint8Array.from(bin, ch=>ch.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+function setSyncStatus(text, type='warn'){
+  const el=$('syncStatus'); if(el){el.textContent=text; el.className='syncStatus '+type;}
+  const badge=$('syncBadge'); if(badge){
+    badge.textContent=isGithubSyncReady() ? 'Sync on' : 'Sync off';
+  }
+}
+function syncPayload(){return {version:1, exportedAt:new Date().toISOString(), progress};}
+function progressChangedByMerge(before, after){return JSON.stringify(before)!==JSON.stringify(after);}
+function mergeProgress(localProgress, remoteProgress){
+  const merged={...(localProgress||{})};
+  Object.entries(remoteProgress||{}).forEach(([key, remoteItem])=>{
+    const localItem=merged[key];
+    if(!localItem){merged[key]=remoteItem; return;}
+    const lt=Date.parse(localItem.updatedAt||'')||0;
+    const rt=Date.parse(remoteItem.updatedAt||'')||0;
+    if(rt>=lt) merged[key]=remoteItem;
+  });
+  return merged;
+}
+async function githubFetchRemoteProgress(){
+  const c=mergedGithubSyncConfig();
+  const url=githubApiFileUrl()+`?ref=${encodeURIComponent(c.branch)}`;
+  const r=await fetch(url, {headers:githubHeaders(), cache:'no-store'});
+  if(r.status===404){githubRemoteSha=null; return null;}
+  if(!r.ok) throw new Error(`GitHub read: ${r.status} ${r.statusText}`);
+  const data=await r.json();
+  githubRemoteSha=data.sha || null;
+  const parsed=JSON.parse(fromBase64Unicode(data.content||''));
+  return parsed.progress || parsed;
+}
+async function githubPullProgress({silent=false}={}){
+  if(!isGithubSyncReady()){setSyncStatus('Синхронизация не настроена. Заполни поля и нажми «Сохранить настройки».','warn'); return;}
+  try{
+    if(!silent) setSyncStatus('Загружаю прогресс из GitHub…','warn');
+    const remote=await githubFetchRemoteProgress();
+    if(!remote){setSyncStatus('Файл прогресса в GitHub пока не найден. Нажми «Сохранить сейчас», чтобы создать его.','warn'); return;}
+    const before=progress;
+    progress=mergeProgress(progress, remote);
+    localStorage.setItem(LS_PROGRESS, JSON.stringify(progress));
+    renderAll();
+    setSyncStatus('Готово: прогресс загружен и объединён с локальными изменениями.','ok');
+    if(progressChangedByMerge(remote, progress)) scheduleGithubSync(1200);
+  }catch(e){setSyncStatus('Не удалось загрузить из GitHub: '+(e.message||e),'bad');}
+}
+async function githubPushProgress({manual=false, retry=false}={}){
+  if(!isGithubSyncReady()){setSyncStatus('Синхронизация не настроена. Заполни поля и нажми «Сохранить настройки».','warn'); return;}
+  if(githubSyncBusy){scheduleGithubSync(2500); return;}
+  githubSyncBusy=true;
+  try{
+    setSyncStatus(manual?'Сохраняю прогресс в GitHub…':'Автосохранение в GitHub…','warn');
+    const c=mergedGithubSyncConfig();
+    if(!githubRemoteSha){
+      try{await githubFetchRemoteProgress();}catch(e){}
+    }
+    const body={
+      message:`Warframe tracker progress sync ${new Date().toISOString()}`,
+      content:toBase64Unicode(JSON.stringify(syncPayload(), null, 2)),
+      branch:c.branch
+    };
+    if(githubRemoteSha) body.sha=githubRemoteSha;
+    const r=await fetch(githubApiFileUrl(), {method:'PUT', headers:{...githubHeaders(), 'Content-Type':'application/json'}, body:JSON.stringify(body)});
+    if((r.status===409 || r.status===422) && !retry){
+      await githubFetchRemoteProgress();
+      githubSyncBusy=false;
+      return githubPushProgress({manual, retry:true});
+    }
+    if(!r.ok) throw new Error(`GitHub write: ${r.status} ${r.statusText}`);
+    const data=await r.json();
+    githubRemoteSha=data.content?.sha || githubRemoteSha;
+    githubSyncDirty=false;
+    setSyncStatus('Сохранено в GitHub: '+new Date().toLocaleString('ru-RU'),'ok');
+  }catch(e){
+    githubSyncDirty=true;
+    setSyncStatus('Не удалось сохранить в GitHub: '+(e.message||e),'bad');
+  }finally{
+    githubSyncBusy=false;
+  }
+}
+function scheduleGithubSync(delay=5000){
+  if(!isGithubSyncReady()) return;
+  githubSyncDirty=true;
+  clearTimeout(githubSyncTimer);
+  githubSyncTimer=setTimeout(()=>githubPushProgress({manual:false}), delay);
+}
+function fillGithubSyncUI(){
+  const c=mergedGithubSyncConfig();
+  if($('syncOwner')) $('syncOwner').value=c.owner||'';
+  if($('syncRepo')) $('syncRepo').value=c.repo||'';
+  if($('syncBranch')) $('syncBranch').value=c.branch||'main';
+  if($('syncPath')) $('syncPath').value=c.path||'warframe-progress.json';
+  if($('syncToken')) $('syncToken').value=c.token||'';
+  setSyncStatus(isGithubSyncReady()?'Синхронизация настроена. При открытии страницы прогресс будет подтягиваться из GitHub.':'Синхронизация не настроена. Прогресс пока хранится только в этом браузере.', isGithubSyncReady()?'ok':'warn');
+}
+function initGithubSyncUI(){
+  if(!$('syncSaveSettings')) return;
+  fillGithubSyncUI();
+  $('syncSaveSettings').onclick=()=>{
+    githubSyncConfig={
+      owner:$('syncOwner').value.trim(),
+      repo:$('syncRepo').value.trim(),
+      branch:$('syncBranch').value.trim()||'main',
+      path:$('syncPath').value.trim()||'warframe-progress.json',
+      token:$('syncToken').value.trim(),
+      enabled:true
+    };
+    writeGithubSyncConfig(githubSyncConfig);
+    setSyncStatus('Настройки сохранены. Сейчас можно нажать «Загрузить с GitHub» или «Сохранить сейчас».','ok');
+  };
+  $('syncPull').onclick=()=>githubPullProgress({silent:false});
+  $('syncPush').onclick=()=>githubPushProgress({manual:true});
+  $('syncDisable').onclick=()=>{
+    if(!confirm('Отключить GitHub-синхронизацию на этом устройстве? Локальный прогресс останется.')) return;
+    githubSyncConfig={...mergedGithubSyncConfig(), enabled:false, token:''};
+    writeGithubSyncConfig(githubSyncConfig);
+    githubRemoteSha=null; githubSyncDirty=false; clearTimeout(githubSyncTimer);
+    fillGithubSyncUI();
+  };
+}
+async function autoGithubPullAfterLoad(){
+  if(isGithubSyncReady()) await githubPullProgress({silent:true});
+}
+
 function exportProgress(){
   const blob=new Blob([JSON.stringify({version:1, exportedAt:new Date().toISOString(), progress}, null, 2)], {type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='warframe-tracker-backup.json'; a.click(); URL.revokeObjectURL(a.href);
 }
-function importProgress(file){ const reader=new FileReader(); reader.onload=()=>{try{const data=JSON.parse(reader.result); progress=data.progress||data; localStorage.setItem(LS_PROGRESS, JSON.stringify(progress)); renderAll(); alert('Прогресс импортирован.');}catch(e){alert('Не удалось импортировать JSON.');}}; reader.readAsText(file); }
+function importProgress(file){ const reader=new FileReader(); reader.onload=()=>{try{const data=JSON.parse(reader.result); progress=data.progress||data; localStorage.setItem(LS_PROGRESS, JSON.stringify(progress)); renderAll(); scheduleGithubSync(1200); alert('Прогресс импортирован. Если GitHub-синхронизация включена, он автоматически сохранится в репозиторий.');}catch(e){alert('Не удалось импортировать JSON.');}}; reader.readAsText(file); }
 function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function attr(s){return escapeHtml(s)}
 $('tabFrames').onclick=()=>{mode='frames'; selectedKey=null; $('tabFrames').classList.add('active'); $('tabWeapons').classList.remove('active'); fillCategories(); renderList(true)};
@@ -689,8 +914,9 @@ $('search').oninput=()=>renderList(false); $('category').onchange=()=>renderList
 $('reloadBtn').onclick=()=>{localStorage.removeItem(LS_ITEMS); selectedKey=null; loadData(true)};
 $('themeToggle').onclick=()=>applyTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark');
 $('exportBtn').onclick=exportProgress; $('importBtn').onclick=()=>$('importFile').click(); $('importFile').onchange=e=>{if(e.target.files[0]) importProgress(e.target.files[0])};
-$('wipeBtn').onclick=()=>{if(confirm('Точно очистить весь прогресс?')){progress={}; localStorage.removeItem(LS_PROGRESS); renderAll();}};
-loadData(false);
+$('wipeBtn').onclick=()=>{if(confirm('Точно очистить весь прогресс? Если GitHub-синхронизация включена, пустой прогресс тоже сохранится в GitHub.')){progress={}; localStorage.removeItem(LS_PROGRESS); renderAll(); scheduleGithubSync(1200);}};
+initGithubSyncUI();
+loadData(false).then(()=>autoGithubPullAfterLoad());
 </script>
 </body>
 </html>
