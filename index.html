@@ -176,11 +176,23 @@
     .favActions{display:flex; align-items:center; justify-content:flex-end; gap:10px; flex-wrap:wrap; text-align:right}
     .favoritesHead h3,.section h3{margin:0; font-size:20px; letter-spacing:.08em; text-transform:uppercase;}
     .favoritesHead h3{color:#8a6a22; text-shadow:0 1px 0 rgba(255,255,255,.62)}
-    .favgrid{position:relative; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px;}
+    .favgrid{position:relative; display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:10px;}
     .favcard{display:grid; grid-template-columns:46px minmax(0,1fr) auto; gap:10px; align-items:center; padding:11px; border-radius:0; clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px); border:1px solid rgba(197,157,75,.42); background:linear-gradient(135deg,rgba(255,241,196,.55),rgba(185,244,255,.32)); cursor:pointer; transition:.15s transform,.15s border-color,.15s background;}
     .favcard:hover{border-color:rgba(197,157,75,.78); background:linear-gradient(135deg,rgba(255,238,184,.72),rgba(183,244,255,.45)); transform:translateY(-1px)}
     .favempty{color:#627888; font-size:13px; padding:13px; border-radius:0; clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); border:1px dashed rgba(95,139,158,.35); background:rgba(255,255,255,.34)}
     .favcard.marketFav{border-color:rgba(57,199,223,.40); background:linear-gradient(135deg,rgba(185,244,255,.46),rgba(255,241,196,.38));}
+    .favcard.favBundle{grid-template-columns:54px minmax(0,1fr) auto; align-items:start;}
+    .favcard.favBundle .thumb{width:54px; height:54px;}
+    .favcard.marketFavSingle{grid-template-columns:38px minmax(0,1fr) auto; gap:9px; padding:9px;}
+    .favcard.marketFavSingle .thumb{width:38px; height:38px;}
+    .favTitle{font-weight:900; color:#0e1b24; letter-spacing:.02em; line-height:1.16; overflow-wrap:anywhere;}
+    .favSub{font-size:12px; color:#6b7d88; margin-top:3px; line-height:1.28;}
+    .favMarketLines{display:grid; gap:5px; margin-top:9px;}
+    .favMarketLine{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px; align-items:center; padding:5px 7px; border:1px solid rgba(65,105,126,.16); background:rgba(255,255,255,.28); clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px);}
+    .favMarketLineName{min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:12px; font-weight:800; color:#15323d;}
+    .favMarketLinePrice{white-space:nowrap; font-size:12px; font-weight:900; color:#8a6a22;}
+    .favMarketLinePrice.muted{color:#7b8d98; font-weight:800;}
+    .favPartLabel{font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:.06em; color:#8a6a22; margin-top:3px;}
     .favprice{display:inline-flex; align-items:center; margin-top:4px; padding:3px 8px; font-size:12px; font-weight:900; color:#15323d; background:rgba(234,211,148,.44); border:1px solid rgba(197,157,75,.32); border-radius:999px;}
     .favkind{font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:#78909d; font-weight:900; margin-bottom:2px;}
     .marketActions .starbtn{width:40px; min-width:40px; height:40px;}
@@ -196,7 +208,7 @@
     input, select, textarea{width:100%; background:rgba(255,255,255,.68); border:1px solid rgba(65,105,126,.22); border-radius:0; clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); padding:12px 13px; outline:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.6);}
     input:focus, select:focus, textarea:focus{border-color:rgba(57,199,223,.75); box-shadow:0 0 0 3px rgba(57,199,223,.15), inset 0 1px 0 rgba(255,255,255,.75)}
     .list{display:grid; gap:8px; max-height:640px; overflow:auto; padding-right:4px; scrollbar-color:rgba(57,199,223,.55) rgba(255,255,255,.24);}
-    .row{display:grid; grid-template-columns:42px minmax(0,1fr) auto auto; gap:10px; align-items:center; padding:10px; border-radius:0; clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); border:1px solid rgba(65,105,126,.20); background:rgba(255,255,255,.44); cursor:pointer; transition:.15s transform,.15s background,.15s border-color;}
+    .row{display:grid; grid-template-columns:42px minmax(0,1fr) auto; gap:10px; align-items:center; padding:10px; border-radius:0; clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); border:1px solid rgba(65,105,126,.20); background:rgba(255,255,255,.44); cursor:pointer; transition:.15s transform,.15s background,.15s border-color;}
     .row:hover,.row.active{background:linear-gradient(135deg,rgba(185,244,255,.45),rgba(255,255,255,.52)); border-color:rgba(57,199,223,.56); transform:translateX(2px)}
     .thumb{width:42px; height:42px; border-radius:8px; background:#dbe9ef; object-fit:cover; border:1px solid rgba(57,199,223,.30); box-shadow:0 0 18px rgba(57,199,223,.10)}
     .rtitle{font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; letter-spacing:.02em; color:#0e1b24;}
@@ -298,6 +310,7 @@
     .priceBox{padding:10px; border-radius:0; clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px); background:rgba(57,199,223,.08); border:1px solid rgba(57,199,223,.18)}
     .priceBox b{display:block; font-size:20px; color:#10232d}.priceBox span{font-size:11px; color:#6b7d88}
     .marketWarn{font-size:12px; color:#8b651d; line-height:1.45; padding:10px 12px; border:1px solid rgba(210,154,51,.28); background:rgba(210,154,51,.10); clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+    .rowBadges{display:flex; align-items:center; justify-content:flex-end; gap:6px; flex-wrap:nowrap; min-width:max-content;}
     .pricepill{display:inline-flex; align-items:center; gap:4px; margin-left:0; justify-self:end; padding:2px 8px; border-radius:999px; color:#15323d; background:rgba(234,211,148,.44); border:1px solid rgba(197,157,75,.32); font-weight:800; font-size:11px; white-space:nowrap}
     .marketSummary{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:10px}
     .marketSummary .stat b{font-size:22px}
@@ -466,11 +479,18 @@
     body[data-theme="dark"] .priceBox{background:rgba(57,199,223,.10); border-color:rgba(57,199,223,.20)}
     body[data-theme="dark"] .marketWarn{color:#f0d18c; background:rgba(210,154,51,.12); border-color:rgba(210,154,51,.28)}
     body[data-theme="dark"] .pricepill,body[data-theme="dark"] .favprice{color:#ffe8a4; background:rgba(197,157,75,.15); border-color:rgba(197,157,75,.32)}
+    body[data-theme="dark"] .favTitle{color:#e9f7ff}
+    body[data-theme="dark"] .favSub{color:#9ab2c1}
+    body[data-theme="dark"] .favMarketLine{background:rgba(8,18,27,.38); border-color:rgba(107,208,230,.14)}
+    body[data-theme="dark"] .favMarketLineName{color:#d9f8ff}
+    body[data-theme="dark"] .favMarketLinePrice{color:#ffe8a4}
+    body[data-theme="dark"] .favMarketLinePrice.muted{color:#8ba6b7}
+    body[data-theme="dark"] .favPartLabel{color:#e5c67e}
     body[data-theme="dark"] .favkind{color:#8ea6b3}
     body[data-theme="dark"] ::selection{background:rgba(73,223,255,.35); color:#06111b}
 
     @media(max-width:1000px){.favoritesHead{align-items:flex-start; flex-direction:column}.favActions{text-align:left; justify-content:flex-start}.modline{grid-template-columns:1fr}.buildstats,.modSummary,.costgrid,.marketPrice,.marketSummary{grid-template-columns:repeat(2,1fr)}.dropline,.marketRow{grid-template-columns:1fr}.marketActions{justify-content:flex-start}}
-    @media(max-width:680px){.marketPrice,.marketSummary{grid-template-columns:1fr}}
+    @media(max-width:680px){.marketPrice,.marketSummary{grid-template-columns:1fr}.favgrid{grid-template-columns:1fr}.favcard.favBundle{grid-template-columns:46px minmax(0,1fr) auto}.favcard.favBundle .thumb{width:46px;height:46px}.favMarketLine{grid-template-columns:1fr auto}}
     @media(max-width:1000px){.hero,.grid{grid-template-columns:1fr} aside{min-height:auto}.list{max-height:420px}.checkline{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.detailtop{grid-template-columns:76px 1fr}.bigthumb{width:76px;height:76px} .app{padding:14px} h2{font-size:26px}}
 
   </style>
@@ -632,18 +652,79 @@ const LS_CLOUD_NOTE='wf_collection_supabase_cloud_v1';
 const LS_MARKET_ITEMS='wf_market_items_cache_v1';
 const LS_MARKET_PRICES='wf_market_price_cache_v1';
 const MARKET_CACHE_TTL=1000*60*60*6;
+const MARKET_PRICE_CACHE_LIMIT=180;
 let marketItems=[];
 let marketIndex={byName:{}, byUrl:{}};
-let marketPriceCache=JSON.parse(localStorage.getItem(LS_MARKET_PRICES)||'{}');
+let marketPriceCache=readJsonFromStorage(LS_MARKET_PRICES, {});
 let items={frames:[], weapons:[], mods:[]};
-let progress=JSON.parse(localStorage.getItem(LS_PROGRESS)||'{}');
+let progress=readJsonFromStorage(LS_PROGRESS, {});
 let mode='frames'; let selectedKey=null;
+
+function readJsonFromStorage(key, fallback){
+  try{
+    const raw=localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  }catch(e){
+    console.warn('Storage read failed', key, e);
+    return fallback;
+  }
+}
+function isQuotaError(e){
+  return e && (e.name==='QuotaExceededError' || e.name==='NS_ERROR_DOM_QUOTA_REACHED' || e.code===22 || e.code===1014 || /quota|exceeded/i.test(e.message||''));
+}
+function pruneObjectByDate(obj, limit=MARKET_PRICE_CACHE_LIMIT){
+  const entries=Object.entries(obj||{});
+  if(entries.length<=limit) return obj||{};
+  entries.sort((a,b)=>Date.parse(b[1]?.fetchedAt||0)-Date.parse(a[1]?.fetchedAt||0));
+  return Object.fromEntries(entries.slice(0, limit));
+}
+function freeStorageForCriticalSave(protectKey=''){
+  // Большие справочники не являются прогрессом: их можно заново скачать кнопкой «Обновить список».
+  [LS_ITEMS, LS_MARKET_ITEMS].forEach(k=>{ if(k!==protectKey){ try{localStorage.removeItem(k);}catch(e){} }});
+  if(protectKey!==LS_MARKET_PRICES){
+    try{
+      marketPriceCache=pruneObjectByDate(marketPriceCache, 60);
+      localStorage.setItem(LS_MARKET_PRICES, JSON.stringify(marketPriceCache));
+    }catch(e){ try{localStorage.removeItem(LS_MARKET_PRICES);}catch(_){} }
+  }
+}
+function safeLocalSet(key, value, opts={}){
+  try{
+    localStorage.setItem(key, value);
+    return true;
+  }catch(e){
+    if(!isQuotaError(e)){
+      if(opts.throwOnError) throw e;
+      console.warn('localStorage set failed', key, e);
+      return false;
+    }
+    freeStorageForCriticalSave(key);
+    try{
+      localStorage.setItem(key, value);
+      return true;
+    }catch(e2){
+      console.warn('localStorage quota still exceeded for', key, e2);
+      if(opts.critical){
+        const msg='Локальный кэш браузера переполнен. Я очистил тяжёлые справочники; облачное сохранение продолжит работать, но после перезагрузки может понадобиться нажать «Обновить список».';
+        try{setCloudStatus(msg, 'warn');}catch(_){/* статус ещё мог не инициализироваться */}
+      }
+      return false;
+    }
+  }
+}
+function saveProgressLocal(){
+  return safeLocalSet(LS_PROGRESS, JSON.stringify(progress), {critical:true});
+}
+function saveMarketPriceCache(){
+  marketPriceCache=pruneObjectByDate(marketPriceCache, MARKET_PRICE_CACHE_LIMIT);
+  return safeLocalSet(LS_MARKET_PRICES, JSON.stringify(marketPriceCache));
+}
 
 const $=id=>document.getElementById(id);
 function applyTheme(theme){
   const value = theme === 'dark' ? 'dark' : 'light';
   document.body.dataset.theme = value;
-  localStorage.setItem(LS_THEME, value);
+  safeLocalSet(LS_THEME, value);
   const btn = $('themeToggle');
   if(btn) btn.textContent = value === 'dark' ? 'Светлая тема' : 'Тёмная тема';
 }
@@ -823,7 +904,7 @@ function buildMarketIndex(list){
 }
 async function loadMarketItems(force=false){
   if(!force){const cache=localStorage.getItem(LS_MARKET_ITEMS); if(cache){try{marketItems=JSON.parse(cache); buildMarketIndex(marketItems); return true;}catch(e){}}}
-  try{const res=await fetchMarketJson('items'); const data=res.json; const list=data?.payload?.items || data?.items || []; marketItems=list.map(x=>({url_name:x.url_name||x.urlName||'', item_name:x.item_name||x.itemName||x.name||''})).filter(x=>x.url_name); localStorage.setItem(LS_MARKET_ITEMS, JSON.stringify(marketItems)); buildMarketIndex(marketItems); return true;}catch(e){console.warn('Warframe.Market items load failed', e); buildMarketIndex(marketItems); return false;}
+  try{const res=await fetchMarketJson('items'); const data=res.json; const list=data?.payload?.items || data?.items || []; marketItems=list.map(x=>({url_name:x.url_name||x.urlName||'', item_name:x.item_name||x.itemName||x.name||''})).filter(x=>x.url_name); safeLocalSet(LS_MARKET_ITEMS, JSON.stringify(marketItems)); buildMarketIndex(marketItems); return true;}catch(e){console.warn('Warframe.Market items load failed', e); buildMarketIndex(marketItems); return false;}
 }
 function findMarketItemByName(name){const clean=String(name||'').trim(); if(!clean) return null; const exact=marketIndex.byName[normalizeNameKey(clean)]; if(exact) return {...exact, guessed:false}; const slug=marketSlug(clean); if(marketIndex.byUrl[slug]) return {...marketIndex.byUrl[slug], guessed:false}; return {url_name:slug, item_name:clean, guessed:true};}
 function marketCandidateName(item, partName=''){
@@ -906,8 +987,8 @@ async function fetchMarketPrice(urlName, {force=false}={}){
   const key=String(urlName||'').trim(); if(!key) throw new Error('Не указан market url_name');
   if(!force && isMarketPriceFresh(marketPriceCache[key])) return marketPriceCache[key];
   let res;
-  try{res=await fetchMarketJson(`items/${encodeURIComponent(key)}/orders`);}catch(e){const info={url_name:key, fetchedAt:new Date().toISOString(), error:e.message||'Failed to fetch'}; marketPriceCache[key]=info; localStorage.setItem(LS_MARKET_PRICES, JSON.stringify(marketPriceCache)); throw new Error(info.error);}
-  const json=res.json; const info=summarizeMarketOrders(key, json?.payload?.orders || []); info.source=res.source; const itemInfo=marketIndex.byUrl[key]; if(itemInfo) info.item_name=itemInfo.item_name; marketPriceCache[key]=info; localStorage.setItem(LS_MARKET_PRICES, JSON.stringify(marketPriceCache)); return info;
+  try{res=await fetchMarketJson(`items/${encodeURIComponent(key)}/orders`);}catch(e){const info={url_name:key, fetchedAt:new Date().toISOString(), error:e.message||'Failed to fetch'}; marketPriceCache[key]=info; saveMarketPriceCache(); throw new Error(info.error);}
+  const json=res.json; const info=summarizeMarketOrders(key, json?.payload?.orders || []); info.source=res.source; const itemInfo=marketIndex.byUrl[key]; if(itemInfo) info.item_name=itemInfo.item_name; marketPriceCache[key]=info; saveMarketPriceCache(); return info;
 }
 function bestMarketSell(info){return info ? (info.sellMinOnline ?? info.sellMin ?? null) : null;}
 function marketPriceBlock(info){
@@ -967,15 +1048,58 @@ function getMarketFavorites(){
     return `${a.item.name} ${a.row.label}`.localeCompare(`${b.item.name} ${b.row.label}`);
   });
 }
+function marketRowsWithPrices(item){
+  return marketRowsForItem(item).map(row=>{
+    const m=marketUrlFor(item,row.part);
+    const url=m?.url_name || marketSlug(marketCandidateName(item,row.part));
+    const info=url ? marketPriceCache[url] : null;
+    const price=bestMarketSell(info);
+    return {...row, url, info, price};
+  });
+}
+function marketLinePriceText(price){return price!==null && price!==undefined ? `${fmtNum(price)} pl` : '—';}
+function favoriteBundleSetPriceInfo(item){
+  const rows=marketRowsWithPrices(item);
+  const priced=rows.filter(r=>r.price!==null).length;
+  const setRow=rows.find(r=>!r.part);
+  const setPrice=setRow && setRow.price!==null ? setRow.price : null;
+  return {rows, priced, setPrice};
+}
+function favoriteBundlePriceBadge(info){
+  if(!info || !info.rows.length) return '';
+  const countText=`${info.priced}/${info.rows.length}`;
+  if(info.setPrice!==null) return `<span class="favprice">${fmtNum(info.setPrice)} pl · сет · ${countText}</span>`;
+  if(info.priced) return `<span class="favprice">сет — · ${countText}</span>`;
+  return '';
+}
+function renderFavoriteMarketLines(item, {limit=7}={}){
+  const rows=marketRowsWithPrices(item);
+  if(!rows.length) return '';
+  const shown=rows.slice(0, limit);
+  const extra=rows.length>limit ? `<div class="favMarketLine"><span class="favMarketLineName">Ещё позиций</span><span class="favMarketLinePrice muted">+${rows.length-limit}</span></div>` : '';
+  return `<div class="favMarketLines">${shown.map(r=>`<div class="favMarketLine"><span class="favMarketLineName" title="${attr(r.label)}">${escapeHtml(r.label)}</span><span class="favMarketLinePrice ${r.price===null?'muted':''}">${marketLinePriceText(r.price)}</span></div>`).join('')}${extra}</div>`;
+}
+function collectFavoriteMarketUrls(){
+  const seen=new Set();
+  const urls=[];
+  const add=url=>{const clean=String(url||'').trim(); if(clean && !seen.has(clean)){seen.add(clean); urls.push(clean);}};
+  getMarketFavorites().forEach(f=>add(f.url));
+  [...items.frames,...items.weapons].forEach(item=>{
+    if(!/prime/i.test(item.name||'')) return;
+    if(!getP(item).favorite) return;
+    marketRowsWithPrices(item).forEach(r=>add(r.url));
+  });
+  return urls;
+}
 async function updateFavoriteMarketPrices(button){
-  const favs=getMarketFavorites().filter(f=>f.url);
-  if(!favs.length){alert('В избранном пока нет Prime-частей или Prime-сетов с market url_name.'); return;}
+  const urls=collectFavoriteMarketUrls();
+  if(!urls.length){alert('В избранном пока нет Prime-сетов или Prime-частей с market url_name.'); return;}
   const oldText=button?.textContent;
   if(button){button.disabled=true; button.textContent='Обновляю избранное…';}
   let ok=0, fail=0;
-  for(const fav of favs){
-    try{await fetchMarketPrice(fav.url,{force:true}); ok++;}
-    catch(e){fail++; console.warn('Favorite price update failed', fav.url, e);}
+  for(const url of urls){
+    try{await fetchMarketPrice(url,{force:true}); ok++;}
+    catch(e){fail++; console.warn('Favorite price update failed', url, e);}
     renderFavorites(); renderList(false);
     await sleep(420);
   }
@@ -1043,7 +1167,7 @@ function getP(item){
   });
   return progress[k];
 }
-function save(){localStorage.setItem(LS_PROGRESS, JSON.stringify(progress)); calcOverall(); renderFavorites(); renderList(false); scheduleCloudSync();}
+function save(){saveProgressLocal(); calcOverall(); renderFavorites(); renderList(false); scheduleCloudSync();}
 async function fetchJson(url){ const r=await fetch(url, {cache:'no-store'}); if(!r.ok) throw new Error(url); return await r.json(); }
 async function loadData(force=false){
   $('dataStatus').textContent='Загружаю актуальные списки предметов, модов, переводов и дропа…';
@@ -1068,7 +1192,7 @@ async function loadData(force=false){
     items.frames = wf.filter(x=>x.name && !/Conclave|Skin|Helmet|Systems|Chassis|Neuroptics/i.test(x.type||'')).map(x=>cleanItem(x,'frames','Warframes')).sort((a,b)=>a.name.localeCompare(b.name));
     items.weapons = weaponGroups.flat().filter(x=>x.name && !/Conclave/i.test(x.name)).map(x=>cleanItem(x,'weapons')).sort((a,b)=>a.name.localeCompare(b.name));
     items.mods = modJson.filter(x=>x.name && !/conclave/i.test(x.name+' '+(x.type||''))).map(x=>cleanMod(x, ruMap, dropMap)).sort((a,b)=>a.name.localeCompare(b.name));
-    localStorage.setItem(LS_ITEMS, JSON.stringify(items));
+    safeLocalSet(LS_ITEMS, JSON.stringify(items));
     const extra=[]; extra.push(ruOk?'RU-переводы загружены':'RU-переводы частично/не загружены'); extra.push(dropsOk?'дроп загружен':'дроп частично/не загружен'); extra.push(marketOk?'Warframe.Market связан':'Warframe.Market частично/не связан');
     $('dataStatus').textContent=`Актуальный список загружен: ${items.frames.length} фреймов, ${items.weapons.length} оружия, ${items.mods.length} модов. ${extra.join(', ')}.`;
   }catch(e){
@@ -1101,18 +1225,28 @@ function renderFavorites(){
   const updateBtn=$('marketUpdateFavorites');
   if(updateBtn) updateBtn.onclick=()=>updateFavoriteMarketPrices(updateBtn);
   if(!box) return;
+
   const gearHtml=gearFavs.map(i=>{
     const p=getP(i); const k=keyOf(i); const kind=i.kind==='frames'?'Фрейм':'Оружие';
-    const m=marketUrlFor(i); const info=m?.url_name ? marketPriceCache[m.url_name] : null; const price=bestMarketSell(info);
-    return `<div class="favcard" data-key="${attr(k)}"><img class="thumb" src="${imageUrl(i)}" onerror="this.style.visibility='hidden'"><div><div class="favkind">${kind}</div><div class="rtitle">${escapeHtml(i.name)}</div><div class="rtype">${escapeHtml(stateLabels[p.state]||'')}</div>${price!==null?`<span class="favprice">${fmtNum(price)} pl</span>`:''}</div><button class="starbtn active" data-unfav="${attr(k)}" title="Убрать из избранного">★</button></div>`;
+    const prime=/prime/i.test(i.name||'');
+    const marketLines=prime ? renderFavoriteMarketLines(i) : '';
+    const bundleInfo=prime ? favoriteBundleSetPriceInfo(i) : {rows:[], priced:0, setPrice:null};
+    const totalRows=bundleInfo.rows;
+    const priced=bundleInfo.priced;
+    const totalBadge=prime ? favoriteBundlePriceBadge(bundleInfo) : '';
+    const simpleStatus=!prime ? `<div class="favSub">${escapeHtml(stateLabels[p.state]||'')}</div>` : `<div class="favSub">${kind} · Prime Market${priced?` · ${priced}/${totalRows.length} цен`:''}</div>`;
+    return `<div class="favcard ${prime?'favBundle':''}" data-key="${attr(k)}"><img class="thumb" src="${imageUrl(i)}" onerror="this.style.visibility='hidden'"><div><div class="favkind">${kind}</div><div class="favTitle">${escapeHtml(i.name)}</div>${simpleStatus}${marketLines || totalBadge}${marketLines ? totalBadge : ''}</div><button class="starbtn active" data-unfav="${attr(k)}" title="Убрать из избранного">★</button></div>`;
   }).join('');
-  const marketHtml=marketFavs.map(f=>{
-    const icon=f.row.part ? '◈' : '◆';
+
+  const gearFavKeys=new Set(gearFavs.map(i=>keyOf(i)));
+  const marketHtml=marketFavs.filter(f=>!gearFavKeys.has(f.key)).map(f=>{
     const price=f.price!==null ? `${fmtNum(f.price)} pl` : 'цена не загружена';
-    const meta=f.row.part ? `Prime-часть · ${escapeHtml(f.item.name)}` : 'Prime-сет';
-    return `<div class="favcard marketFav" data-market-fav="${attr(f.uid)}"><img class="thumb" src="${imageUrl(f.item)}" onerror="this.style.visibility='hidden'"><div><div class="favkind">${icon} Warframe.Market</div><div class="rtitle">${escapeHtml(f.item.name)}${f.row.part?` · ${escapeHtml(f.row.label)}`:''}</div><div class="rtype">${meta}</div><span class="favprice">${escapeHtml(price)}</span></div><button class="starbtn active" data-unfav-market="${attr(f.uid)}" title="Убрать из избранного">★</button></div>`;
+    const title=f.row.part ? f.row.label : f.item.name;
+    const partLabel=f.row.part ? `${f.item.name} · отдельная Prime-часть` : 'Prime-сет';
+    return `<div class="favcard marketFav marketFavSingle" data-market-fav="${attr(f.uid)}"><img class="thumb" src="${imageUrl(f.item)}" onerror="this.style.visibility='hidden'"><div><div class="favkind">Warframe.Market</div><div class="favTitle">${escapeHtml(title)}</div><div class="favPartLabel">${escapeHtml(partLabel)}</div><span class="favprice">${escapeHtml(price)}</span></div><button class="starbtn active" data-unfav-market="${attr(f.uid)}" title="Убрать из избранного">★</button></div>`;
   }).join('');
-  box.innerHTML=(marketHtml+gearHtml) || '<div class="favempty">Пока ничего не закреплено. Открой Prime-предмет, в блоке Warframe.Market нажми звёздочку у сета или конкретной детали.</div>';
+
+  box.innerHTML=(gearHtml+marketHtml) || '<div class="favempty">Пока ничего не закреплено. Звёздочка у предмета добавляет весь Prime-комплект с деталями, а звёздочка в Warframe.Market — конкретную часть.</div>';
   box.querySelectorAll('.favcard[data-key]').forEach(card=>card.onclick=e=>{
     if(e.target.closest('[data-unfav]')) return;
     selectItem(card.dataset.key);
@@ -1149,10 +1283,10 @@ function renderList(selectFirst){
     if(i.kind==='mods'){
       const active=modStatusGood.has(p.status); const rank=clampRank(p.rank, i.maxRank||10);
       const ru=(p.ruName||i.ruName||'');
-      return `<div class="row modrow ${k===selectedKey?'active':''}" data-key="${attr(k)}"><img class="thumb" src="${imageUrl(i)}" onerror="this.style.visibility='hidden'"><div><div class="rtitle">${escapeHtml(i.name)}${ru?`<span class="ruName">${escapeHtml(ru)}</span>`:''}</div><div class="rtype">${escapeHtml(i.type||i.category||'Mod')} · ${escapeHtml(i.rarity||'')} · ранг ${rank}/${i.maxRank||10}</div></div>${marketListBadge(i)}<span class="badge ${active?'ok':p.status==='farm'?'warn':''}">${modTrackLabels[p.status]||'Нет'}</span></div>`;
+      return `<div class="row modrow ${k===selectedKey?'active':''}" data-key="${attr(k)}"><img class="thumb" src="${imageUrl(i)}" onerror="this.style.visibility='hidden'"><div><div class="rtitle">${escapeHtml(i.name)}${ru?`<span class="ruName">${escapeHtml(ru)}</span>`:''}</div><div class="rtype">${escapeHtml(i.type||i.category||'Mod')} · ${escapeHtml(i.rarity||'')} · ранг ${rank}/${i.maxRank||10}</div></div><div class="rowBadges">${marketListBadge(i)}<span class="badge ${active?'ok':p.status==='farm'?'warn':''}">${modTrackLabels[p.status]||'Нет'}</span></div></div>`;
     }
     const done=['built','mastered','ready'].includes(p.state);
-    return `<div class="row ${k===selectedKey?'active':''}" data-key="${attr(k)}"><img class="thumb" src="${imageUrl(i)}" onerror="this.style.visibility='hidden'"><div><div class="rtitle">${escapeHtml(i.name)}</div><div class="rtype">${escapeHtml(i.type||i.category||'')}</div></div>${marketListBadge(i)}<span class="badge ${done?'ok':p.state!=='none'?'warn':''}">${stateLabels[p.state]}</span></div>`;
+    return `<div class="row ${k===selectedKey?'active':''}" data-key="${attr(k)}"><img class="thumb" src="${imageUrl(i)}" onerror="this.style.visibility='hidden'"><div><div class="rtitle">${escapeHtml(i.name)}</div><div class="rtype">${escapeHtml(i.type||i.category||'')}</div></div><div class="rowBadges">${marketListBadge(i)}<span class="badge ${done?'ok':p.state!=='none'?'warn':''}">${stateLabels[p.state]}</span></div></div>`;
   }).join('') || '<div class="empty" style="height:220px">Ничего не найдено</div>';
   document.querySelectorAll('.row').forEach(r=>r.onclick=()=>selectItem(r.dataset.key));
   if(selectFirst && list.length && (!selectedKey || !list.some(i=>keyOf(i)===selectedKey))) selectItem(keyOf(list[0]));
@@ -1328,7 +1462,7 @@ async function cloudPullProgress({silent=false}={}){
     }
     const remote=normalizeProgressPayload(data.progress);
     progress=mergeProgress(progress, remote);
-    localStorage.setItem(LS_PROGRESS, JSON.stringify(progress));
+    saveProgressLocal();
     renderAll();
     setCloudStatus('Готово: прогресс загружен из облака и объединён с локальными изменениями.', 'ok');
     if(progressChangedByMerge(remote, progress)) scheduleCloudSync(1200);
@@ -1430,7 +1564,7 @@ function exportProgress(){
   const blob=new Blob([JSON.stringify({version:1, exportedAt:new Date().toISOString(), progress}, null, 2)], {type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='warframe-tracker-backup.json'; a.click(); URL.revokeObjectURL(a.href);
 }
-function importProgress(file){ const reader=new FileReader(); reader.onload=()=>{try{const data=JSON.parse(reader.result); progress=data.progress||data; localStorage.setItem(LS_PROGRESS, JSON.stringify(progress)); renderAll(); scheduleCloudSync(1200); alert('Прогресс импортирован. Если облачное сохранение включено, он автоматически сохранится.');}catch(e){alert('Не удалось импортировать JSON.');}}; reader.readAsText(file); }
+function importProgress(file){ const reader=new FileReader(); reader.onload=()=>{try{const data=JSON.parse(reader.result); progress=data.progress||data; saveProgressLocal(); renderAll(); scheduleCloudSync(1200); alert('Прогресс импортирован. Если облачное сохранение включено, он автоматически сохранится.');}catch(e){alert('Не удалось импортировать JSON.');}}; reader.readAsText(file); }
 function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function attr(s){return escapeHtml(s)}
 function setMode(next){
