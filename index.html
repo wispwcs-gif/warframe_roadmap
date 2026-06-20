@@ -173,12 +173,17 @@
     .grid{display:grid; grid-template-columns:370px minmax(0,1fr); gap:18px;}
     .favorites{margin-bottom:18px; padding:18px;}
     .favoritesHead{position:relative; display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;}
+    .favActions{display:flex; align-items:center; justify-content:flex-end; gap:10px; flex-wrap:wrap; text-align:right}
     .favoritesHead h3,.section h3{margin:0; font-size:20px; letter-spacing:.08em; text-transform:uppercase;}
     .favoritesHead h3{color:#8a6a22; text-shadow:0 1px 0 rgba(255,255,255,.62)}
-    .favgrid{position:relative; display:grid; grid-template-columns:repeat(auto-fill,minmax(225px,1fr)); gap:10px;}
+    .favgrid{position:relative; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px;}
     .favcard{display:grid; grid-template-columns:46px minmax(0,1fr) auto; gap:10px; align-items:center; padding:11px; border-radius:0; clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px); border:1px solid rgba(197,157,75,.42); background:linear-gradient(135deg,rgba(255,241,196,.55),rgba(185,244,255,.32)); cursor:pointer; transition:.15s transform,.15s border-color,.15s background;}
     .favcard:hover{border-color:rgba(197,157,75,.78); background:linear-gradient(135deg,rgba(255,238,184,.72),rgba(183,244,255,.45)); transform:translateY(-1px)}
     .favempty{color:#627888; font-size:13px; padding:13px; border-radius:0; clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); border:1px dashed rgba(95,139,158,.35); background:rgba(255,255,255,.34)}
+    .favcard.marketFav{border-color:rgba(57,199,223,.40); background:linear-gradient(135deg,rgba(185,244,255,.46),rgba(255,241,196,.38));}
+    .favprice{display:inline-flex; align-items:center; margin-top:4px; padding:3px 8px; font-size:12px; font-weight:900; color:#15323d; background:rgba(234,211,148,.44); border:1px solid rgba(197,157,75,.32); border-radius:999px;}
+    .favkind{font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:#78909d; font-weight:900; margin-bottom:2px;}
+    .marketActions .starbtn{width:40px; min-width:40px; height:40px;}
     .starbtn{width:40px; height:40px; display:grid; place-items:center; padding:0; border-radius:0; background:rgba(255,255,255,.42); border:1px solid rgba(65,105,126,.22); color:#6a7b85; font-size:18px; line-height:1; clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);}
     .starbtn.active{background:linear-gradient(135deg,rgba(234,211,148,.62),rgba(255,255,255,.38)); border-color:rgba(197,157,75,.72); color:#9a721b;}
     .detailActions{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
@@ -191,11 +196,12 @@
     input, select, textarea{width:100%; background:rgba(255,255,255,.68); border:1px solid rgba(65,105,126,.22); border-radius:0; clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); padding:12px 13px; outline:none; box-shadow:inset 0 1px 0 rgba(255,255,255,.6);}
     input:focus, select:focus, textarea:focus{border-color:rgba(57,199,223,.75); box-shadow:0 0 0 3px rgba(57,199,223,.15), inset 0 1px 0 rgba(255,255,255,.75)}
     .list{display:grid; gap:8px; max-height:640px; overflow:auto; padding-right:4px; scrollbar-color:rgba(57,199,223,.55) rgba(255,255,255,.24);}
-    .row{display:grid; grid-template-columns:42px minmax(0,1fr) auto; gap:10px; align-items:center; padding:10px; border-radius:0; clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); border:1px solid rgba(65,105,126,.20); background:rgba(255,255,255,.44); cursor:pointer; transition:.15s transform,.15s background,.15s border-color;}
+    .row{display:grid; grid-template-columns:42px minmax(0,1fr) auto auto; gap:10px; align-items:center; padding:10px; border-radius:0; clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); border:1px solid rgba(65,105,126,.20); background:rgba(255,255,255,.44); cursor:pointer; transition:.15s transform,.15s background,.15s border-color;}
     .row:hover,.row.active{background:linear-gradient(135deg,rgba(185,244,255,.45),rgba(255,255,255,.52)); border-color:rgba(57,199,223,.56); transform:translateX(2px)}
     .thumb{width:42px; height:42px; border-radius:8px; background:#dbe9ef; object-fit:cover; border:1px solid rgba(57,199,223,.30); box-shadow:0 0 18px rgba(57,199,223,.10)}
     .rtitle{font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; letter-spacing:.02em; color:#0e1b24;}
-    .rtype{font-size:12px; color:#6b7d88; margin-top:3px;}
+    .rtype{font-size:12px; color:#6b7d88; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .row > div:nth-child(2){min-width:0;}
     .badge{font-size:11px; padding:6px 8px; border-radius:0; clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px); border:1px solid rgba(65,105,126,.22); color:#4e6572; white-space:nowrap; background:rgba(255,255,255,.42);}
     .badge.ok{color:#1d7a4e; border-color:rgba(62,191,124,.42); background:rgba(62,191,124,.11)}
     .badge.warn{color:#8b651d; border-color:rgba(210,154,51,.42); background:rgba(210,154,51,.12)}
@@ -292,7 +298,7 @@
     .priceBox{padding:10px; border-radius:0; clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px); background:rgba(57,199,223,.08); border:1px solid rgba(57,199,223,.18)}
     .priceBox b{display:block; font-size:20px; color:#10232d}.priceBox span{font-size:11px; color:#6b7d88}
     .marketWarn{font-size:12px; color:#8b651d; line-height:1.45; padding:10px 12px; border:1px solid rgba(210,154,51,.28); background:rgba(210,154,51,.10); clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
-    .pricepill{display:inline-flex; align-items:center; gap:4px; margin-left:8px; padding:2px 8px; border-radius:999px; color:#15323d; background:rgba(234,211,148,.44); border:1px solid rgba(197,157,75,.32); font-weight:800; font-size:11px; white-space:nowrap}
+    .pricepill{display:inline-flex; align-items:center; gap:4px; margin-left:0; justify-self:end; padding:2px 8px; border-radius:999px; color:#15323d; background:rgba(234,211,148,.44); border:1px solid rgba(197,157,75,.32); font-weight:800; font-size:11px; white-space:nowrap}
     .marketSummary{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:10px}
     .marketSummary .stat b{font-size:22px}
 
@@ -459,10 +465,11 @@
     body[data-theme="dark"] .marketActions a{background:rgba(10,23,34,.70); color:#d9f8ff; border-color:rgba(105,219,245,.20)}
     body[data-theme="dark"] .priceBox{background:rgba(57,199,223,.10); border-color:rgba(57,199,223,.20)}
     body[data-theme="dark"] .marketWarn{color:#f0d18c; background:rgba(210,154,51,.12); border-color:rgba(210,154,51,.28)}
-    body[data-theme="dark"] .pricepill{color:#ffe8a4; background:rgba(197,157,75,.15); border-color:rgba(197,157,75,.32)}
+    body[data-theme="dark"] .pricepill,body[data-theme="dark"] .favprice{color:#ffe8a4; background:rgba(197,157,75,.15); border-color:rgba(197,157,75,.32)}
+    body[data-theme="dark"] .favkind{color:#8ea6b3}
     body[data-theme="dark"] ::selection{background:rgba(73,223,255,.35); color:#06111b}
 
-    @media(max-width:1000px){.modline{grid-template-columns:1fr}.buildstats,.modSummary,.costgrid,.marketPrice,.marketSummary{grid-template-columns:repeat(2,1fr)}.dropline,.marketRow{grid-template-columns:1fr}.marketActions{justify-content:flex-start}}
+    @media(max-width:1000px){.favoritesHead{align-items:flex-start; flex-direction:column}.favActions{text-align:left; justify-content:flex-start}.modline{grid-template-columns:1fr}.buildstats,.modSummary,.costgrid,.marketPrice,.marketSummary{grid-template-columns:repeat(2,1fr)}.dropline,.marketRow{grid-template-columns:1fr}.marketActions{justify-content:flex-start}}
     @media(max-width:680px){.marketPrice,.marketSummary{grid-template-columns:1fr}}
     @media(max-width:1000px){.hero,.grid{grid-template-columns:1fr} aside{min-height:auto}.list{max-height:420px}.checkline{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.detailtop{grid-template-columns:76px 1fr}.bigthumb{width:76px;height:76px} .app{padding:14px} h2{font-size:26px}}
 
@@ -521,8 +528,11 @@
 
     <section class="favorites glass">
       <div class="favoritesHead">
-        <h3>Избранное / закреплённые</h3>
-        <span class="small">Закрепи нужных фреймов и оружие, чтобы они всегда были сверху.</span>
+        <h3>Избранное / рынок</h3>
+        <div class="favActions">
+          <span class="small">Закрепляй Prime-сеты и отдельные части, а цены обновляй одной кнопкой.</span>
+          <button id="marketUpdateFavorites" class="secondary">Обновить цены избранного</button>
+        </div>
       </div>
       <div id="favoriteList" class="favgrid"></div>
     </section>
@@ -908,6 +918,71 @@ function marketPriceBlock(info){
   return `<div class="marketPrice"><div class="priceBox"><b>${plText(info.sellMinOnline)}</b><span>мин. продажа онлайн</span></div><div class="priceBox"><b>${plText(info.sellMin)}</b><span>мин. продажа всего</span></div><div class="priceBox"><b>${plText(info.buyMaxOnline)}</b><span>макс. покупка онлайн</span></div><div class="priceBox"><b>${plText(info.sellMedian)}</b><span>медиана продаж</span></div></div><div class="marketMeta">Ордеров: продаж онлайн ${fmtNum(info.sellOnlineCount)}, покупок онлайн ${fmtNum(info.buyOnlineCount)}. Обновлено: ${escapeHtml(updated)}${sourceNote}.</div>`;
 }
 function marketListBadge(item){const m=marketUrlFor(item); const info=m?.url_name ? marketPriceCache[m.url_name] : null; const price=bestMarketSell(info); return price!==null ? `<span class="pricepill">${fmtNum(price)} pl</span>` : '';}
+const MARKET_SET_PART_KEY='__set';
+function marketPartKey(part=''){return String(part||'') || MARKET_SET_PART_KEY;}
+function marketFavUid(item, part=''){return `${keyOf(item)}::${marketPartKey(part)}`;}
+function findGearItemByKey(k){return [...items.frames,...items.weapons].find(i=>keyOf(i)===k) || null;}
+function isPrimeMarketFavoriteAllowed(item, row){return !!item && item.kind!=='mods' && /prime/i.test(item.name||'') && !!row;}
+function getMarketRowStore(item, part=''){
+  const p=getP(item);
+  if(part){
+    p.components=p.components||{};
+    p.components[part]=p.components[part]||{status:'none', count:'', notes:''};
+    return p.components[part];
+  }
+  return p;
+}
+function isMarketRowFavorite(item, part=''){return !!getMarketRowStore(item, part).marketFavorite;}
+function setMarketRowFavorite(item, part='', value=true){
+  const store=getMarketRowStore(item, part);
+  store.marketFavorite=!!value;
+  const p=getP(item);
+  p.updatedAt=new Date().toISOString();
+}
+function rememberMarketUrl(item, part='', url=''){
+  const clean=marketSlug(url || marketCandidateName(item, part));
+  if(!clean) return '';
+  const store=getMarketRowStore(item, part);
+  store.marketUrl=clean;
+  const p=getP(item);
+  p.updatedAt=new Date().toISOString();
+  return clean;
+}
+function getMarketFavorites(){
+  const favs=[];
+  [...items.frames,...items.weapons].forEach(item=>{
+    if(!/prime/i.test(item.name||'')) return;
+    marketRowsForItem(item).forEach(row=>{
+      if(!isMarketRowFavorite(item,row.part)) return;
+      const m=marketUrlFor(item,row.part);
+      const url=m?.url_name || marketSlug(marketCandidateName(item,row.part));
+      const info=url ? marketPriceCache[url] : null;
+      const price=bestMarketSell(info);
+      favs.push({type:'market', item, row, key:keyOf(item), uid:marketFavUid(item,row.part), url, info, price});
+    });
+  });
+  return favs.sort((a,b)=>{
+    const ap=a.price==null?-1:a.price, bp=b.price==null?-1:b.price;
+    if(bp!==ap) return bp-ap;
+    return `${a.item.name} ${a.row.label}`.localeCompare(`${b.item.name} ${b.row.label}`);
+  });
+}
+async function updateFavoriteMarketPrices(button){
+  const favs=getMarketFavorites().filter(f=>f.url);
+  if(!favs.length){alert('В избранном пока нет Prime-частей или Prime-сетов с market url_name.'); return;}
+  const oldText=button?.textContent;
+  if(button){button.disabled=true; button.textContent='Обновляю избранное…';}
+  let ok=0, fail=0;
+  for(const fav of favs){
+    try{await fetchMarketPrice(fav.url,{force:true}); ok++;}
+    catch(e){fail++; console.warn('Favorite price update failed', fav.url, e);}
+    renderFavorites(); renderList(false);
+    await sleep(420);
+  }
+  if(button){button.disabled=false; button.textContent=oldText || 'Обновить цены избранного';}
+  renderFavorites(); renderList(false);
+  if(fail) alert(`Цены обновлены частично: ${ok} ок, ${fail} не удалось.`);
+}
 function marketRowsForItem(item){
   if(item.kind==='mods') return [{label:item.name, part:'', hint:item.ruName||item.type||'Мод'}];
   const rows=[{label:/prime/i.test(item.name)?`${item.name} Set`:item.name, part:'', hint:'Предмет / сет на Warframe.Market'}];
@@ -918,15 +993,23 @@ function renderMarketSection(item){
   const rows=marketRowsForItem(item); let total=0; let priced=0;
   rows.forEach(r=>{const m=marketUrlFor(item,r.part); const info=m?.url_name?marketPriceCache[m.url_name]:null; const price=bestMarketSell(info); if(price!==null){total+=price; priced++;}});
   const summary = priced ? `<div class="marketSummary"><div class="stat"><b>${fmtNum(total)} pl</b><span>сумма загруженных строк</span></div><div class="stat"><b>${priced}/${rows.length}</b><span>цен найдено</span></div><div class="stat"><b>6 ч</b><span>кэш цен</span></div></div>` : '';
-  const rowsHtml=rows.map((r,idx)=>{const m=marketUrlFor(item, r.part); const url=m?.url_name || ''; const info=url ? marketPriceCache[url] : null; const guessed=m?.guessed ? ' · url подобран автоматически' : ''; return `<div class="marketRow" data-market-row="${idx}" data-part="${attr(r.part)}"><div><div class="marketName">${escapeHtml(r.label)}</div><div class="marketMeta">${escapeHtml(r.hint)}${guessed}. Ссылка: ${url?`warframe.market/items/${escapeHtml(url)}`:'не указана'}</div>${marketPriceBlock(info)}</div><input class="marketUrlInput" data-market-url-input="${idx}" value="${attr(url)}" placeholder="url_name, например ash_prime_set"><div class="marketActions"><button class="secondary" data-market-update="${idx}">Обновить цену</button><a href="${url?`https://warframe.market/items/${attr(url)}`:'#'}" target="_blank" rel="noopener">Открыть</a></div></div>`;}).join('');
-  return `<div class="section"><h3>Warframe.Market</h3>${summary}<div class="marketWarn">Цены берутся из текущих ордеров Warframe.Market. Если браузер блокирует прямой запрос, приложение получает цены через Supabase proxy. Это ориентир в платине, не гарантия сделки. Для Prime-сетов и частей можно поправить url_name вручную, если автосопоставление промахнулось.</div><div class="marketGrid">${rowsHtml}</div><div class="detailActions"><button id="marketUpdateAll">Обновить все цены в карточке</button></div></div>`;
+  const rowsHtml=rows.map((r,idx)=>{
+    const m=marketUrlFor(item, r.part); const url=m?.url_name || ''; const info=url ? marketPriceCache[url] : null; const guessed=m?.guessed ? ' · url подобран автоматически' : '';
+    const favAllowed=isPrimeMarketFavoriteAllowed(item,r);
+    const favActive=favAllowed && isMarketRowFavorite(item,r.part);
+    const favBtn=favAllowed ? `<button class="${favActive?'starbtn active':'starbtn'}" data-market-fav-toggle="${idx}" title="${favActive?'Убрать из избранного':'Добавить в избранное'}">${favActive?'★':'☆'}</button>` : '';
+    return `<div class="marketRow" data-market-row="${idx}" data-part="${attr(r.part)}"><div><div class="marketName">${escapeHtml(r.label)}</div><div class="marketMeta">${escapeHtml(r.hint)}${guessed}. Ссылка: ${url?`warframe.market/items/${escapeHtml(url)}`:'не указана'}</div>${marketPriceBlock(info)}</div><input class="marketUrlInput" data-market-url-input="${idx}" value="${attr(url)}" placeholder="url_name, например ash_prime_set"><div class="marketActions">${favBtn}<button class="secondary" data-market-update="${idx}">Обновить цену</button><a href="${url?`https://warframe.market/items/${attr(url)}`:'#'}" target="_blank" rel="noopener">Открыть</a></div></div>`;
+  }).join('');
+  const favHint=/prime/i.test(item.name||'') && item.kind!=='mods' ? ' Звёздочка у Prime-сета или детали добавляет именно эту позицию в избранное.' : '';
+  return `<div class="section"><h3>Warframe.Market</h3>${summary}<div class="marketWarn">Цены берутся из текущих ордеров Warframe.Market. Если браузер блокирует прямой запрос, приложение получает цены через Supabase proxy. Это ориентир в платине, не гарантия сделки. Для Prime-сетов и частей можно поправить url_name вручную, если автосопоставление промахнулось.${favHint}</div><div class="marketGrid">${rowsHtml}</div><div class="detailActions"><button id="marketUpdateAll">Обновить все цены в карточке</button></div></div>`;
 }
 function bindMarketSection(item){
   const detail=$('detail'); if(!detail) return;
-  detail.querySelectorAll('[data-market-url-input]').forEach(input=>{input.onchange=()=>{const idx=Number(input.dataset.marketUrlInput); const row=marketRowsForItem(item)[idx]; if(!row) return; const url=marketSlug(input.value || marketCandidateName(item,row.part)); input.value=url; const p=getP(item); if(item.kind==='mods') p.marketUrl=url; else if(row.part){p.components[row.part]=p.components[row.part]||{status:'none',count:'',notes:''}; p.components[row.part].marketUrl=url;} else p.marketUrl=url; p.updatedAt=new Date().toISOString(); save(); renderDetail(item);};});
-  detail.querySelectorAll('[data-market-update]').forEach(btn=>{btn.onclick=async()=>{const idx=Number(btn.dataset.marketUpdate); const row=marketRowsForItem(item)[idx]; if(!row) return; const input=detail.querySelector(`[data-market-url-input="${idx}"]`); const url=marketSlug(input?.value || marketCandidateName(item,row.part)); btn.disabled=true; btn.textContent='Обновляю…'; try{await fetchMarketPrice(url,{force:true}); const p=getP(item); if(item.kind==='mods') p.marketUrl=url; else if(row.part){p.components[row.part]=p.components[row.part]||{status:'none',count:'',notes:''}; p.components[row.part].marketUrl=url;} else p.marketUrl=url; p.updatedAt=new Date().toISOString(); save();}catch(e){alert('Не удалось получить цену: '+(e.message||e));}finally{renderDetail(item);}};});
+  detail.querySelectorAll('[data-market-url-input]').forEach(input=>{input.onchange=()=>{const idx=Number(input.dataset.marketUrlInput); const row=marketRowsForItem(item)[idx]; if(!row) return; const url=rememberMarketUrl(item,row.part,input.value || marketCandidateName(item,row.part)); input.value=url; save(); renderDetail(item);};});
+  detail.querySelectorAll('[data-market-fav-toggle]').forEach(btn=>{btn.onclick=e=>{e.preventDefault(); e.stopPropagation(); const idx=Number(btn.dataset.marketFavToggle); const row=marketRowsForItem(item)[idx]; if(!row) return; const input=detail.querySelector(`[data-market-url-input="${idx}"]`); rememberMarketUrl(item,row.part,input?.value || marketCandidateName(item,row.part)); setMarketRowFavorite(item,row.part,!isMarketRowFavorite(item,row.part)); save(); renderDetail(item);};});
+  detail.querySelectorAll('[data-market-update]').forEach(btn=>{btn.onclick=async()=>{const idx=Number(btn.dataset.marketUpdate); const row=marketRowsForItem(item)[idx]; if(!row) return; const input=detail.querySelector(`[data-market-url-input="${idx}"]`); const url=rememberMarketUrl(item,row.part,input?.value || marketCandidateName(item,row.part)); btn.disabled=true; btn.textContent='Обновляю…'; try{await fetchMarketPrice(url,{force:true}); save();}catch(e){alert('Не удалось получить цену: '+(e.message||e));}finally{renderDetail(item);}};});
   const all=$('marketUpdateAll');
-  if(all) all.onclick=async()=>{all.disabled=true; all.textContent='Обновляю цены…'; const rows=marketRowsForItem(item); for(let i=0;i<rows.length;i++){const row=rows[i]; const input=detail.querySelector(`[data-market-url-input="${i}"]`); const url=marketSlug(input?.value || marketCandidateName(item,row.part)); if(!url) continue; try{await fetchMarketPrice(url,{force:true});}catch(e){} await sleep(380);} renderDetail(item);};
+  if(all) all.onclick=async()=>{all.disabled=true; all.textContent='Обновляю цены…'; const rows=marketRowsForItem(item); for(let i=0;i<rows.length;i++){const row=rows[i]; const input=detail.querySelector(`[data-market-url-input="${i}"]`); const url=rememberMarketUrl(item,row.part,input?.value || marketCandidateName(item,row.part)); if(!url) continue; try{await fetchMarketPrice(url,{force:true});}catch(e){} await sleep(420);} save(); renderDetail(item);};
 }
 
 function cleanMod(x, ruMap={}, dropMap={}){
@@ -1011,22 +1094,44 @@ function fillProgressFilter(){
   if([...el.options].some(o=>o.value===cur)) el.value=cur;
 }
 function renderFavorites(){
-  const all=[...items.frames,...items.weapons];
-  const favs=all.filter(i=>getP(i).favorite).sort((a,b)=>(getP(b).updatedAt||'').localeCompare(getP(a).updatedAt||'') || a.name.localeCompare(b.name));
+  const gear=[...items.frames,...items.weapons];
+  const gearFavs=gear.filter(i=>getP(i).favorite).sort((a,b)=>(getP(b).updatedAt||'').localeCompare(getP(a).updatedAt||'') || a.name.localeCompare(b.name));
+  const marketFavs=getMarketFavorites();
   const box=$('favoriteList');
+  const updateBtn=$('marketUpdateFavorites');
+  if(updateBtn) updateBtn.onclick=()=>updateFavoriteMarketPrices(updateBtn);
   if(!box) return;
-  box.innerHTML=favs.map(i=>{
+  const gearHtml=gearFavs.map(i=>{
     const p=getP(i); const k=keyOf(i); const kind=i.kind==='frames'?'Фрейм':'Оружие';
-    return `<div class="favcard" data-key="${attr(k)}"><img class="thumb" src="${imageUrl(i)}" onerror="this.style.visibility='hidden'"><div><div class="rtitle">${escapeHtml(i.name)}</div><div class="rtype">${kind} · ${escapeHtml(stateLabels[p.state]||'')}</div></div><button class="starbtn active" data-unfav="${attr(k)}" title="Убрать из избранного">★</button></div>`;
-  }).join('') || '<div class="favempty">Пока ничего не закреплено. Открой нужный предмет и нажми «★ Закрепить».</div>';
-  box.querySelectorAll('.favcard').forEach(card=>card.onclick=e=>{
+    const m=marketUrlFor(i); const info=m?.url_name ? marketPriceCache[m.url_name] : null; const price=bestMarketSell(info);
+    return `<div class="favcard" data-key="${attr(k)}"><img class="thumb" src="${imageUrl(i)}" onerror="this.style.visibility='hidden'"><div><div class="favkind">${kind}</div><div class="rtitle">${escapeHtml(i.name)}</div><div class="rtype">${escapeHtml(stateLabels[p.state]||'')}</div>${price!==null?`<span class="favprice">${fmtNum(price)} pl</span>`:''}</div><button class="starbtn active" data-unfav="${attr(k)}" title="Убрать из избранного">★</button></div>`;
+  }).join('');
+  const marketHtml=marketFavs.map(f=>{
+    const icon=f.row.part ? '◈' : '◆';
+    const price=f.price!==null ? `${fmtNum(f.price)} pl` : 'цена не загружена';
+    const meta=f.row.part ? `Prime-часть · ${escapeHtml(f.item.name)}` : 'Prime-сет';
+    return `<div class="favcard marketFav" data-market-fav="${attr(f.uid)}"><img class="thumb" src="${imageUrl(f.item)}" onerror="this.style.visibility='hidden'"><div><div class="favkind">${icon} Warframe.Market</div><div class="rtitle">${escapeHtml(f.item.name)}${f.row.part?` · ${escapeHtml(f.row.label)}`:''}</div><div class="rtype">${meta}</div><span class="favprice">${escapeHtml(price)}</span></div><button class="starbtn active" data-unfav-market="${attr(f.uid)}" title="Убрать из избранного">★</button></div>`;
+  }).join('');
+  box.innerHTML=(marketHtml+gearHtml) || '<div class="favempty">Пока ничего не закреплено. Открой Prime-предмет, в блоке Warframe.Market нажми звёздочку у сета или конкретной детали.</div>';
+  box.querySelectorAll('.favcard[data-key]').forEach(card=>card.onclick=e=>{
     if(e.target.closest('[data-unfav]')) return;
     selectItem(card.dataset.key);
-    const item=[...items.frames,...items.weapons].find(i=>keyOf(i)===card.dataset.key);
-    if(item && item.kind!==mode){ mode=item.kind; $('tabFrames').classList.toggle('active', mode==='frames'); $('tabWeapons').classList.toggle('active', mode==='weapons'); fillCategories(); renderList(false); }
+    const item=findGearItemByKey(card.dataset.key);
+    if(item && item.kind!==mode){ mode=item.kind; $('tabFrames').classList.toggle('active', mode==='frames'); $('tabWeapons').classList.toggle('active', mode==='weapons'); $('tabMods').classList.toggle('active', mode==='mods'); fillCategories(); renderList(false); }
+  });
+  box.querySelectorAll('.favcard[data-market-fav]').forEach(card=>card.onclick=e=>{
+    if(e.target.closest('[data-unfav-market]')) return;
+    const [itemKey]=card.dataset.marketFav.split('::');
+    const item=findGearItemByKey(itemKey);
+    if(!item) return;
+    if(item.kind!==mode){ mode=item.kind; $('tabFrames').classList.toggle('active', mode==='frames'); $('tabWeapons').classList.toggle('active', mode==='weapons'); $('tabMods').classList.toggle('active', mode==='mods'); fillCategories(); renderList(false); }
+    selectItem(itemKey);
   });
   box.querySelectorAll('[data-unfav]').forEach(btn=>btn.onclick=e=>{
-    e.stopPropagation(); const k=btn.dataset.unfav; progress[k]=progress[k]||{components:{}}; progress[k].favorite=false; progress[k].updatedAt=new Date().toISOString(); save(); if(selectedKey===k){ const item=all.find(i=>keyOf(i)===k); if(item) renderDetail(item); }
+    e.stopPropagation(); const k=btn.dataset.unfav; progress[k]=progress[k]||{components:{}}; progress[k].favorite=false; progress[k].updatedAt=new Date().toISOString(); save(); if(selectedKey===k){ const item=findGearItemByKey(k); if(item) renderDetail(item); }
+  });
+  box.querySelectorAll('[data-unfav-market]').forEach(btn=>btn.onclick=e=>{
+    e.stopPropagation(); const uid=btn.dataset.unfavMarket; const [itemKey,partKey]=uid.split('::'); const item=findGearItemByKey(itemKey); if(!item) return; const part=partKey===MARKET_SET_PART_KEY?'':partKey; setMarketRowFavorite(item,part,false); save(); if(selectedKey===itemKey) renderDetail(item);
   });
 }
 function renderList(selectFirst){
@@ -1179,6 +1284,21 @@ function normalizeProgressPayload(payload){
   if(!payload || typeof payload!=='object') return {};
   if(payload.progress && typeof payload.progress==='object') return payload.progress;
   return payload;
+}
+function progressChangedByMerge(before, after){
+  try{return JSON.stringify(before)!==JSON.stringify(after);}
+  catch(e){return true;}
+}
+function mergeProgress(localProgress, remoteProgress){
+  const merged={...(localProgress||{})};
+  Object.entries(remoteProgress||{}).forEach(([key, remoteItem])=>{
+    const localItem=merged[key];
+    if(!localItem){merged[key]=remoteItem; return;}
+    const lt=Date.parse(localItem.updatedAt||'')||0;
+    const rt=Date.parse(remoteItem.updatedAt||'')||0;
+    merged[key]=rt>=lt ? remoteItem : localItem;
+  });
+  return merged;
 }
 async function refreshCloudUser(){
   const sb=getSupabaseClient();
