@@ -575,7 +575,7 @@
           </select>
         </div>
         <div id="itemList" class="list"></div>
-        <div class="footerhint">Данные прогресса сохраняются локально и, после входа, в облако Supabase.</div>
+        <div class="footerhint">Данные прогресса сохраняются локально сразу. В облако Supabase — вручную или автосохранением раз в 5 минут.</div>
       </aside>
 
       <main class="glass">
@@ -653,6 +653,7 @@ const LS_MARKET_ITEMS='wf_market_items_cache_v1';
 const LS_MARKET_PRICES='wf_market_price_cache_v1';
 const MARKET_CACHE_TTL=1000*60*60*6;
 const MARKET_PRICE_CACHE_LIMIT=180;
+const CLOUD_AUTOSAVE_DELAY=1000*60*5;
 let marketItems=[];
 let marketIndex={byName:{}, byUrl:{}};
 let marketPriceCache=readJsonFromStorage(LS_MARKET_PRICES, {});
@@ -1399,6 +1400,7 @@ function getSupabaseClient(){
 }
 let cloudUser=null;
 let cloudSaveTimer=null;
+let cloudSavePlannedAt=0;
 let cloudSaveBusy=false;
 let cloudSaveDirty=false;
 
@@ -1465,7 +1467,7 @@ async function cloudPullProgress({silent=false}={}){
     saveProgressLocal();
     renderAll();
     setCloudStatus('Готово: прогресс загружен из облака и объединён с локальными изменениями.', 'ok');
-    if(progressChangedByMerge(remote, progress)) scheduleCloudSync(1200);
+    if(progressChangedByMerge(remote, progress)) scheduleCloudSync();
   }catch(e){setCloudStatus('Не удалось загрузить из облака: '+(e.message||e), 'bad');}
 }
 async function cloudPushProgress({manual=false}={}){
@@ -1473,26 +1475,50 @@ async function cloudPushProgress({manual=false}={}){
   if(!sb){setCloudStatus('Supabase-клиент не загрузился. Проверь интернет.', 'bad'); return;}
   if(!cloudUser) await refreshCloudUser();
   if(!cloudUser){setCloudStatus('Сначала войди в аккаунт.', 'warn'); return;}
-  if(cloudSaveBusy){scheduleCloudSync(2500); return;}
+  if(manual){
+    clearTimeout(cloudSaveTimer);
+    cloudSaveTimer=null;
+    cloudSavePlannedAt=0;
+  }
+  if(cloudSaveBusy){
+    cloudSaveDirty=true;
+    if(manual) setCloudStatus('Сохранение уже идёт. Подожди пару секунд и нажми «Сохранить сейчас» ещё раз, если нужно.', 'warn');
+    else scheduleCloudSync();
+    return;
+  }
   cloudSaveBusy=true;
   try{
-    setCloudStatus(manual?'Сохраняю прогресс в облако…':'Автосохранение в облако…', 'warn');
+    setCloudStatus(manual?'Сохраняю прогресс в облако…':'Плановое автосохранение в облако…', 'warn');
     const {error}=await sb
       .from(SUPABASE_PROGRESS_TABLE)
       .upsert({user_id:cloudUser.id, progress, updated_at:new Date().toISOString()}, {onConflict:'user_id'});
     if(error) throw error;
     cloudSaveDirty=false;
+    clearTimeout(cloudSaveTimer);
+    cloudSaveTimer=null;
+    cloudSavePlannedAt=0;
     setCloudStatus('Сохранено в облако: '+new Date().toLocaleString('ru-RU'), 'ok');
   }catch(e){
     cloudSaveDirty=true;
     setCloudStatus('Не удалось сохранить в облако: '+(e.message||e), 'bad');
   }finally{cloudSaveBusy=false;}
 }
-function scheduleCloudSync(delay=2500){
+function scheduleCloudSync(delay=CLOUD_AUTOSAVE_DELAY){
   if(!isCloudReady()) return;
   cloudSaveDirty=true;
-  clearTimeout(cloudSaveTimer);
-  cloudSaveTimer=setTimeout(()=>cloudPushProgress({manual:false}), delay);
+  const wait=Math.max(CLOUD_AUTOSAVE_DELAY, Number(delay)||0);
+  if(cloudSaveTimer){
+    const mins=Math.max(1, Math.ceil((cloudSavePlannedAt-Date.now())/60000));
+    setCloudStatus(`Есть несохранённые изменения. Автосохранение уже запланировано примерно через ${mins} мин. Можно нажать «Сохранить сейчас».`, 'warn');
+    return;
+  }
+  cloudSavePlannedAt=Date.now()+wait;
+  setCloudStatus('Есть несохранённые изменения. Автосохранение сработает через 5 минут. Можно сохранить вручную кнопкой «Сохранить сейчас».', 'warn');
+  cloudSaveTimer=setTimeout(()=>{
+    cloudSaveTimer=null;
+    cloudSavePlannedAt=0;
+    if(cloudSaveDirty) cloudPushProgress({manual:false});
+  }, wait);
 }
 async function signInCloud(){
   const sb=getSupabaseClient();
@@ -1535,6 +1561,8 @@ async function signOutCloud(){
   await sb.auth.signOut();
   cloudUser=null;
   clearTimeout(cloudSaveTimer);
+  cloudSaveTimer=null;
+  cloudSavePlannedAt=0;
   cloudSaveDirty=false;
   setCloudAuthUI();
   setCloudStatus('Ты вышел из облака. Локальный прогресс на этом устройстве остался.', 'warn');
@@ -1564,7 +1592,7 @@ function exportProgress(){
   const blob=new Blob([JSON.stringify({version:1, exportedAt:new Date().toISOString(), progress}, null, 2)], {type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='warframe-tracker-backup.json'; a.click(); URL.revokeObjectURL(a.href);
 }
-function importProgress(file){ const reader=new FileReader(); reader.onload=()=>{try{const data=JSON.parse(reader.result); progress=data.progress||data; saveProgressLocal(); renderAll(); scheduleCloudSync(1200); alert('Прогресс импортирован. Если облачное сохранение включено, он автоматически сохранится.');}catch(e){alert('Не удалось импортировать JSON.');}}; reader.readAsText(file); }
+function importProgress(file){ const reader=new FileReader(); reader.onload=()=>{try{const data=JSON.parse(reader.result); progress=data.progress||data; saveProgressLocal(); renderAll(); scheduleCloudSync(); alert('Прогресс импортирован. Если облако включено, он сохранится по расписанию через 5 минут или вручную кнопкой «Сохранить сейчас».');}catch(e){alert('Не удалось импортировать JSON.');}}; reader.readAsText(file); }
 function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function attr(s){return escapeHtml(s)}
 function setMode(next){
@@ -1580,7 +1608,7 @@ $('tabMods').onclick=()=>setMode('mods');
 $('search').oninput=()=>renderList(false); $('category').onchange=()=>renderList(false); $('progressFilter').onchange=()=>renderList(false);
 $('reloadBtn').onclick=()=>{localStorage.removeItem(LS_ITEMS); localStorage.removeItem(LS_MARKET_ITEMS); selectedKey=null; loadData(true)};
 $('themeToggle').onclick=()=>applyTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark');
-$('wipeBtn').onclick=()=>{if(confirm('Точно очистить весь прогресс? Если облачное сохранение включено, пустой прогресс тоже сохранится.')){progress={}; localStorage.removeItem(LS_PROGRESS); renderAll(); scheduleCloudSync(1200);}};
+$('wipeBtn').onclick=()=>{if(confirm('Точно очистить весь прогресс? Если облачное сохранение включено, пустой прогресс тоже сохранится.')){progress={}; localStorage.removeItem(LS_PROGRESS); renderAll(); scheduleCloudSync();}};
 initSupabaseCloudUI();
 loadData(false).then(async()=>{ await autoSupabasePullAfterLoad(); });
 </script>
